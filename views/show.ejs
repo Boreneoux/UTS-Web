@@ -1,0 +1,59 @@
+<%- include ('partials/head') %>
+<body>
+    <%- include('partials/navbar') %> 
+
+    <h1 class="mt-3">NIM : <%= student.NIM %>  </h1>
+    <div class="container">
+        <table class="table table-secondary table-hover table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">NIM</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Nilai</th>
+                    <th scope="col">Grade</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <% if (student.nilai>= 80 && student.nilai <= 100) {%>
+                        <% student.grade='A' %>
+                        <% student.status='LULUS!' %>
+                    <%} else if (student.nilai>= 60 && student.nilai <= 79) {%>
+                        <% student.grade='B' %>
+                        <%student.status='LULUS!' %>
+                    <% } else if (student.nilai>= 0 && student.nilai <= 59) {%>
+                        <% student.grade='C' %>
+                        <% student.status='GAGAL!' %>
+                <%}%>
+                    <tr>
+                        <th scope="col">
+                            <%= student.NIM %>
+                        </th>
+                        <td>
+                            <%= student.name %>
+                        </td>
+                        <td>
+                            <%= student.nilai %>
+                        </td>
+                        <td>
+                            <%= student.grade %>
+                        </td>
+                        <td>
+                            <%= student.status %>
+                        </td>
+
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container text-center">
+        <a href="/" class="btn btn-lg text-light" id="btn-home">Back to Home</a>
+        <a href="/edit/<%= student.NIM %>" class="btn btn-lg text-light" id="btn-home">Edit Nilai</a>
+        <form action="/edit/<%=student.NIM%>?_method=DELETE" method="POST">
+            <button class="btn btn-lg text-light mt-2" id="btn-home">Delete Data Ini!</button>
+        </form>
+    </div>
+    <%- include('partials/footer') %> 
+</body>
+    
+</html>
